@@ -28,12 +28,14 @@ Gem::Specification.new do |s|
     "lib/cloudservers/flavor.rb",
     "lib/cloudservers/image.rb",
     "lib/cloudservers/server.rb",
+    "lib/cloudservers/domain.rb",
     "lib/cloudservers/shared_ip_group.rb",
     "lib/cloudservers/version.rb",
     "test/cloudservers_authentication_test.rb",
     "test/cloudservers_connection_test.rb",
     "test/cloudservers_exception_test.rb",
     "test/cloudservers_servers_test.rb",
+    "test/cloudservers_domains_test.rb",
     "test/test_helper.rb"
   ]
   s.homepage = %q{https://github.com/rackspace/ruby-cloudservers}
@@ -45,6 +47,7 @@ Gem::Specification.new do |s|
     "test/cloudservers_connection_test.rb",
     "test/cloudservers_exception_test.rb",
     "test/cloudservers_servers_test.rb",
+    "test/cloudservers_domains_test.rb",
     "test/test_helper.rb"
   ]
 

@@ -307,6 +307,21 @@ module CloudServers
       CloudServers.symbolize_keys(JSON.parse(response.body)['limits'])
     end
     
+    # domains
+    def list_domains(options = {})
+      anti_cache_param="cacheid=#{Time.now.to_i}"
+      path = CloudServers.paginate(options).empty? ? "#{svrmgmtpath}/domains?#{anti_cache_param}" : "#{svrmgmtpath}/domains?#{CloudServers.paginate(options)}&#{anti_cache_param}"
+      response = csreq("GET",svrmgmthost,path,svrmgmtport,svrmgmtscheme)
+      CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+      CloudServers.symbolize_keys(JSON.parse(response.body)["domains"])
+    end
+    alias :domains :list_domains
+
+    def get_domain(id)
+      CloudServers::Domain.new(self,id)
+    end
+    alias :domain :get_domain
+
     private
     
     # Sets up standard HTTP headers
