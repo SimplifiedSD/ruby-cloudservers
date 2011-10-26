@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = "cloudservers"
-  s.version = ""
+  s.version = "0.4.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["H. Wade Minter", "Mike Mayo", "Dan Prince"]
-  s.date = "2011-10-25"
-  s.description = "A Ruby API to version 1.0 of the Rackspace Cloud Servers product."
-  s.email = "minter@lunenburg.org"
+  s.authors = ["H. Wade Minter", "Mike Mayo", "Dan Prince", "Scott Moe"]
+  s.date = "2011-10-26"
+  s.description = "A Ruby API the Rackspace Cloud Servers product."
+  s.email = "scott.moe@snodm.com"
   s.extra_rdoc_files = [
     "README.rdoc",
     "TODO"
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "TODO",
+    "VERSION",
     "cloudservers.gemspec",
     "lib/cloudservers.rb",
     "lib/cloudservers/authentication.rb",
@@ -46,7 +47,7 @@ Gem::Specification.new do |s|
     "test/fixtures/test_server.json",
     "test/test_helper.rb"
   ]
-  s.homepage = "https://github.com/rackspace/ruby-cloudservers"
+  s.homepage = "https://github.com/SimplifiedSD/ruby-cloudservers"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.11"
   s.summary = "Rackspace Cloud Servers Ruby API"

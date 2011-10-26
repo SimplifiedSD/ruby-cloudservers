@@ -1,3 +1,7 @@
+* Add support for the DNS API
+
+* Add support for the Load Balancer API
+
 * Allow some sort of flag to get the stack trace when an exception is thrown.
 
 * Shared IP group modification code.
