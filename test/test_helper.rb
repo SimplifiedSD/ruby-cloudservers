@@ -15,7 +15,6 @@ def get_test_connection
     Net::HTTP.stubs(:new).returns(server)
 
     CloudServers::Connection.new(:username => "test_account", :api_key => "AABBCCDD11")
-
 end
 
 end
