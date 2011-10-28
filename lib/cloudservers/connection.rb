@@ -6,6 +6,7 @@ module CloudServers
     attr_accessor :authtoken
     attr_accessor :authok
     attr_accessor :svrmgmthost
+    attr_accessor :dnsmgmthost
     attr_accessor :svrmgmtpath
     attr_accessor :svrmgmtport
     attr_accessor :svrmgmtscheme
@@ -309,9 +310,8 @@ module CloudServers
     
     # domains
     def list_domains(options = {})
-      anti_cache_param="cacheid=#{Time.now.to_i}"
-      path = CloudServers.paginate(options).empty? ? "#{svrmgmtpath}/domains?#{anti_cache_param}" : "#{svrmgmtpath}/domains?#{CloudServers.paginate(options)}&#{anti_cache_param}"
-      response = csreq("GET",svrmgmthost,path,svrmgmtport,svrmgmtscheme)
+      path = CloudServers.paginate(options).empty? ? "#{svrmgmtpath}/domains" : "#{svrmgmtpath}/domains?#{CloudServers.paginate(options)}"
+      response = csreq("GET",dnsmgmthost,path,svrmgmtport,svrmgmtscheme)
       CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
       CloudServers.symbolize_keys(JSON.parse(response.body)["domains"])
     end

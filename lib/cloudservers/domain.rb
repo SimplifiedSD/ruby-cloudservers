@@ -18,11 +18,15 @@ module CloudServers
     def initialize(connection, id)
       @id = id
       @connection = connection
+      @dnsmgmthost   = connection.dnsmgmthost
+      @svrmgmtpath   = connection.svrmgmtpath
+      @svrmgmtport   = connection.svrmgmtport
+      @svrmgmtscheme = connection.svrmgmtscheme
       populate
     end
 
     def populate
-      response = @connection.csreq("GET",@connection.svrmgmthost,"#{@connection.svrmgmtpath}/images/#{URI.escape(self.id.to_s)}",@connection.svrmgmtport,@connection.svrmgmtscheme)
+      response = @connection.csreq("GET",@connection.dnsmgmthost,"#{@connection.svrmgmtpath}/domains/#{URI.escape(self.id.to_s)}",@connection.svrmgmtport,@connection.svrmgmtscheme)
       CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
       data = JSON.parse(response.body)
       
@@ -40,7 +44,7 @@ module CloudServers
     alias :refresh :populate
 
     #def delete!
-      #response = @connection.csreq("DELETE",@connection.svrmgmthost,"#{@connection.svrmgmtpath}/images/#{URI.escape(self.id.to_s)}",@connection.svrmgmtport,@connection.svrmgmtscheme)
+      #response = @connection.csreq("DELETE",@connection.dnsmgmthost,"#{@connection.svrmgmtpath}/domains/#{URI.escape(self.id.to_s)}",@connection.svrmgmtport,@connection.svrmgmtscheme)
       #CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
       #true
     #end

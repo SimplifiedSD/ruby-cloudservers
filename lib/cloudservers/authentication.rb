@@ -23,12 +23,14 @@ module CloudServers
       response = server.get(path,hdrhash)
       if (response.code =~ /^20./)
         connection.authtoken = response["x-auth-token"]
-        connection.svrmgmthost = URI.parse(response["x-server-management-url"]).host
-        connection.svrmgmtpath = URI.parse(response["x-server-management-url"]).path
-        # Force the path into the v1.0 URL space
+        server_api_uri = URI.parse(response["x-server-management-url"])
+        connection.svrmgmthost = server_api_uri.host
+        connection.svrmgmtpath = server_api_uri.path
         connection.svrmgmtpath.sub!(/\/.*?\//, '/v1.0/')
-        connection.svrmgmtport = URI.parse(response["x-server-management-url"]).port
-        connection.svrmgmtscheme = URI.parse(response["x-server-management-url"]).scheme
+        connection.svrmgmtport = server_api_uri.port
+        connection.svrmgmtscheme = server_api_uri.scheme
+        account_path = URI.split(server_api_uri.host)[5]
+        connection.dnsmgmthost = URI.join("https://dns.api.rackspacecloud.com", account_path).host
         connection.authok = true
       else
         connection.authtoken = false
