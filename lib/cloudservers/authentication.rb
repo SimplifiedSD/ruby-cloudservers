@@ -31,6 +31,7 @@ module CloudServers
         connection.svrmgmtscheme = server_api_uri.scheme
         account_path = URI.split(server_api_uri.host)[5]
         connection.dnsmgmthost = URI.join("https://dns.api.rackspacecloud.com", account_path).host
+        connection.lbmgmthost = URI.join("https://dfw.loadbalancers.api.rackspacecloud.com", account_path).host
         connection.authok = true
       else
         connection.authtoken = false

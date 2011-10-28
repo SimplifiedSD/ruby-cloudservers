@@ -6,6 +6,7 @@ module CloudServers
     attr_accessor :authtoken
     attr_accessor :authok
     attr_accessor :svrmgmthost
+    attr_accessor :lbmgmthost
     attr_accessor :dnsmgmthost
     attr_accessor :svrmgmtpath
     attr_accessor :svrmgmtport
@@ -321,6 +322,20 @@ module CloudServers
       CloudServers::Domain.new(self,id)
     end
     alias :domain :get_domain
+
+    # load balancers
+    def list_loadbalancers(options = {})
+      path = CloudServers.paginate(options).empty? ? "#{svrmgmtpath}/loadbalancers" : "#{svrmgmtpath}/loadbalancers?#{CloudServers.paginate(options)}"
+      response = csreq("GET",lbmgmthost,path,svrmgmtport,svrmgmtscheme)
+      CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+      CloudServers.symbolize_keys(JSON.parse(response.body)["loadBalancers"])
+    end
+    alias :loadbalancers :list_loadbalancers
+
+    def get_loadbalancer(id)
+      CloudServers::LoadBalancer.new(self, id)
+    end
+    alias :loadbalancer :get_loadbalancer
 
     private
     

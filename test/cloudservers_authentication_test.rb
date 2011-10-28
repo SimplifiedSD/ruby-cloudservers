@@ -9,7 +9,7 @@ class CloudserversAuthenticationTest < Test::Unit::TestCase
     server = mock(:use_ssl= => true, :verify_mode= => true, :start => true, :finish => true)
     server.stubs(:get).returns(response)
     Net::HTTP.stubs(:new).returns(server)
-    connection = stub(:authuser => 'myuser', :authkey => 'bad_key', :auth_host => "a.b.c", :auth_port => "443", :auth_scheme => "https", :authok= => true, :authtoken= => true, :dnsmgmthost= => "", :svrmgmthost= => "", :svrmgmtpath= => "", :svrmgmtpath => "", :svrmgmtport= => "", :svrmgmtscheme= => "", :proxy_host => nil, :proxy_port => nil)
+    connection = stub(:authuser => 'myuser', :authkey => 'bad_key', :auth_host => "a.b.c", :auth_port => "443", :auth_scheme => "https", :authok= => true, :authtoken= => true, :lbmgmthost= => "", :dnsmgmthost= => "", :svrmgmthost= => "", :svrmgmtpath= => "", :svrmgmtpath => "", :svrmgmtport= => "", :svrmgmtscheme= => "", :proxy_host => nil, :proxy_port => nil)
     result = CloudServers::Authentication.new(connection)
     assert_equal result.class, CloudServers::Authentication
   end

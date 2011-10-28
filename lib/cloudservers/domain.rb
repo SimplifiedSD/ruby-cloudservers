@@ -1,6 +1,6 @@
 # $:.unshift File.dirname(__FILE__)
 #
-# I am Scott Moe, Simplified Software Development
+# Written by: Scott Moe, Simplified Software Development
 
 module CloudServers
   class Domain

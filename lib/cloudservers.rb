@@ -40,6 +40,7 @@ module CloudServers
   require 'cloudservers/image'
   require 'cloudservers/flavor'
   require 'cloudservers/domain'
+  require 'cloudservers/loadbalancer'
   require 'cloudservers/shared_ip_group'
   require 'cloudservers/exception'
   
