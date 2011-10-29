@@ -95,7 +95,7 @@ class CloudServersServersTest < Test::Unit::TestCase
   def test_create_server_requires_name
 
     assert_raises(CloudServers::Exception::MissingArgument) do
-        @conn.create_server(:imageId => 2, :flavorId => 2)
+      @conn.create_server(:imageId => 2, :flavorId => 2)
     end
 
   end

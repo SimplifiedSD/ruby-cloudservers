@@ -17,7 +17,7 @@ module CloudServers
     attr_reader :cluster
     attr_reader :updated_at
     attr_reader :created_at
-    attr_reader :account_id
+    #attr_reader :account_id
     attr_reader :source_addresses
 
     def initialize(connection, id)
@@ -35,7 +35,7 @@ module CloudServers
       CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
       data = JSON.parse(response.body)["loadBalancer"]
       
-      @account_id = data["accountLoadBalancerServiceEvents"]["accountId"]
+      #@account_id = data["accountLoadBalancerServiceEvents"]["accountId"]
       @name = data["name"]
       @updated_at = DateTime.parse(data["updated"]["time"])
       @created_at = DateTime.parse(data["created"]["time"])
@@ -64,4 +64,5 @@ module CloudServers
       @status = data["status"]
     end
   end
+
 end

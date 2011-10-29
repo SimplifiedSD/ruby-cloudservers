@@ -337,6 +337,13 @@ module CloudServers
     end
     alias :loadbalancer :get_loadbalancer
 
+    def create_loadbalancer(data)
+      response = csreq("POST",lbmgmthost,"#{svrmgmtpath}/loadbalancers",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+      CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+      loadbalancer_info = JSON.parse(response.body)['loadBalancer']
+      CloudServers::LoadBalancer.new(self, loadbalancer_info['id'])
+    end
+
     private
     
     # Sets up standard HTTP headers
