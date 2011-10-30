@@ -344,6 +344,12 @@ module CloudServers
       CloudServers::LoadBalancer.new(self, loadbalancer_info['id'])
     end
 
+    def delete_loadbalancer(id)
+      response = csreq("DELETE", lbmgmthost, "#{svrmgmtpath}/loadbalancers", svrmgmtport, svrmgmtscheme, {'content-type' => 'application/json'})
+      CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+      response
+    end
+
     private
     
     # Sets up standard HTTP headers

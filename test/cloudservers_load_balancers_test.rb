@@ -44,6 +44,14 @@ class CloudServersLoadBalancersTest < Test::Unit::TestCase
     @conn.create_loadbalancer( load_balancer )
   end
 
+  def test_delete_loadbalancer
+    response = mock()
+    response.stubs(:code => "200")
+    @conn = get_test_connection
+    @conn.stubs(:csreq).returns(response)
+    @conn.delete_loadbalancer( 1234 )
+  end
+
   private
   def get_test_loadbalancer
     response = mock()
