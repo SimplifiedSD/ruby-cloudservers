@@ -337,15 +337,16 @@ module CloudServers
     end
     alias :loadbalancer :get_loadbalancer
 
-    def create_loadbalancer(data)
-      response = csreq("POST",lbmgmthost,"#{svrmgmtpath}/loadbalancers",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+    def create_loadbalancer(options)
+      data = JSON.generate( "loadBalancer" => options )
+      response = csreq("POST",lbmgmthost,"#{svrmgmtpath}/loadbalancers",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'}, data)
       CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
       loadbalancer_info = JSON.parse(response.body)['loadBalancer']
       CloudServers::LoadBalancer.new(self, loadbalancer_info['id'])
     end
 
     def delete_loadbalancer(id)
-      response = csreq("DELETE", lbmgmthost, "#{svrmgmtpath}/loadbalancers", svrmgmtport, svrmgmtscheme, {'content-type' => 'application/json'})
+      response = csreq("DELETE", lbmgmthost, "#{svrmgmtpath}/loadbalancers/#{id}", svrmgmtport, svrmgmtscheme, {'content-type' => 'application/json'})
       CloudServers::Exception.raise_exception(response) unless response.code.match(/^20.$/)
       response
     end
